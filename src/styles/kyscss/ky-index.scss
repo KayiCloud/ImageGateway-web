@@ -1,0 +1,31 @@
+@import './ky-variables.scss';
+@import './ky-container.scss';
+@import './ky-elementui.scss';
+
+.ky-fr{
+  float: right;
+}
+.ky-fl{
+  float: left;
+}
+.ky-center{
+  text-align: center;
+}
+.ky-pointer{
+  cursor: pointer;
+}
+.ky-mt20{
+  margin-top:20px;
+}
+.ky-mb20{
+  margin-bottom:20px;
+}
+.ky-mt10{
+  margin-top:10px;
+}
+.ky-mb10{
+  margin-bottom:10px;
+}
+.ky-dlg-wrap{
+  padding: 20px;
+}

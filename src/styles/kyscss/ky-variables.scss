@@ -1,0 +1,20 @@
+// 改变主题色变量
+$colorPrimary: #00C0EF;
+// el-card头部色
+$colorCardHeader: #e9eef3;
+$colorbgf9: #f9f9f9;
+// 间距
+$pdlg: 20px;
+$pdmd: 15px;
+$pdsm: 10px;
+$pdxs: 6px;
+
+:export {
+  colorPrimary: $colorPrimary;
+  colorCardHeader: $colorCardHeader;
+  colorbgf9: $colorbgf9;
+  pdlg: $pdlg;
+  pdmd: $pdmd;
+  pdsm: $pdsm;
+  pdxs: $pdxs;
+}
