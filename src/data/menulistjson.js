@@ -5,14 +5,14 @@ const menulist = [
     name: '主页',
     redirect: '/tenant/manage',
     hidden: false,
-    meta: { title: '租户管理', icon: 'fa fa-list' },
+    meta: { title: '租户管理', icon: 'iconfont icon333' },
     children: [
       {
         path: 'manage',
-        name: '租户列表',
+        name: '租户管理',
         remark: "tenant",
         hidden: false,
-        meta: { title: '租户列表' },
+        meta: { title: '租户管理' },
         // children:[]
       }
     ]
@@ -23,7 +23,7 @@ const menulist = [
     name: '主页',
     redirect: '/maptenant/manage',
     hidden: false,
-    meta: { title: '映射编码管理', icon: 'fa fa-list' },
+    meta: { title: '映射编码管理', icon: 'iconfont iconguanlian1' },
     children: [
       {
         path: 'manage',
@@ -41,14 +41,14 @@ const menulist = [
     name: '主页',
     redirect: '/querier/manage',
     hidden: false,
-    meta: { title: 'querier管理', icon: 'fa fa-list' },
+    meta: { title: 'querier管理', icon: 'iconfont iconbaifang_line' },
     children: [
       {
         path: 'manage',
-        name: 'querier列表',
+        name: 'querier管理',
         remark: "querier",
         hidden: false,
-        meta: { title: 'querier列表' },
+        meta: { title: 'querier管理' },
         // children:[]
       }
     ]

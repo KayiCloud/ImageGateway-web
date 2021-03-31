@@ -189,8 +189,9 @@ export default {
     flrPath() {
       // 判断设置的几个目录是否存在
       const menuList = getMenu()
-      if (!menuList) return '/'
-      if (menuList.indexOf('/tenant/manage') >= 0 && menuList.indexOf('租户管理') >= 0) {
+      const menu = menuList?JSON.stringify(menuList):''
+      if (!menu) return '/'
+      if (menu.indexOf('/tenant/manage') >= 0) {
         return '/tenant/manage'
       } else {
         return '/'

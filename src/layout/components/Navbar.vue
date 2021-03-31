@@ -15,9 +15,9 @@
             <img :src="avatar" class="user-avatar" />
           </div>
           <el-dropdown-menu slot="dropdown" class="user-dropdown">
-            <router-link to="/updatepwd">
+            <!-- <router-link to="/updatepwd">
               <el-dropdown-item>修改密码</el-dropdown-item>
-            </router-link>
+            </router-link> -->
             <el-dropdown-item divided @click.native="logout">
               <span style="display:block;">退出登录</span>
             </el-dropdown-item>
