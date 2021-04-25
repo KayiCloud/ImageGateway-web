@@ -4,7 +4,7 @@ const home = import('@/views/Home.vue'); //主页
 
 const tenant = import('@/views/tenant/index.vue'); // 租户管理
 const maptenant = import('@/views/maptenant/index.vue'); // 映射编码管理
-const querier = import('@/views/querier/index.vue'); // querier管理
+const querier = import('@/views/querier/index.vue'); // 查询器管理
 
 function look(n) {
   switch (n) {

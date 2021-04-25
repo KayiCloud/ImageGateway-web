@@ -33,12 +33,12 @@
             <span v-if="scope.row.extraProperties.id">{{scope.row.extraProperties}}</span>
           </template>
         </el-table-column> -->
-        <el-table-column label="操作" width="220px">
+        <el-table-column label="操作" width="220px" fixed="right">
           <template slot-scope="scope">
             <el-button type="text" @click="tenantConfigEdit(scope.row)">配置</el-button>
             <el-button type="text" @click="modifyTenant(scope.row)">修改</el-button>
             <el-button type="text" @click="mapTenant(scope.row)">映射</el-button>
-            <el-button type="text" @click="delTenant(scope.row)">删除</el-button>
+            <el-button type="text" class="ky-btntxt-danger" @click="delTenant(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>

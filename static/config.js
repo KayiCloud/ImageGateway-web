@@ -1,8 +1,8 @@
 window.g = {
-  TITLE: '图像转发中间件管理', // 项目名称
+  TITLE: '无极云转发管理', // 项目名称
   PLATFORM: '', // 平台
   AXIOS_TIMEOUT: 10000, // 请求超时时间，默认 10000
-  API_ROOT: 'http://192.168.0.9:42000', // api地址
+  API_ROOT: 'http://192.168.0.50:14200', // api地址
   LOGIN: 'http://localhost:4200/login', // 项目部署后的登录地址
 
   browserOpen: true, // 兼容弹框是否开启 默认开启  http://ip:9006/downloadBrowser?browserName=chrome

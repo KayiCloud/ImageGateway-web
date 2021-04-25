@@ -1,7 +1,7 @@
 {
   "name": "imagegateway",
   "version": "1.0.0",
-  "description": "图像转发中间件管理",
+  "description": "无极云转发管理",
   "author": "YEZQ <497070595@qq.com>",
   "private": true,
   "scripts": {

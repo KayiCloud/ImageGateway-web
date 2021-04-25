@@ -13,7 +13,7 @@
             v-model="formdata.Name"
           ></el-input>
         </el-form-item>
-        <el-form-item label="Provider">
+        <el-form-item label="查询方式">
           <el-input
             clearable
             v-model="formdata.Provider"
@@ -43,7 +43,7 @@
         <!-- <el-table-column prop="id" label="ID"></el-table-column> -->
         <el-table-column prop="name" label="名称" width="220px"></el-table-column>
         <el-table-column prop="title" label="标题" width="220px"></el-table-column>
-        <el-table-column prop="provider" label="provider" width="100px"></el-table-column>
+        <el-table-column prop="provider" label="查询方式" width="100px"></el-table-column>
         <el-table-column prop="style" label="样式" width="180px" :formatter="styleFlr"></el-table-column>
         <!-- <el-table-column prop="tenantId" label="tenantId"></el-table-column> -->
         <el-table-column prop="creationTime" label="创建时间" min-width="160px" :formatter="mix_tableDateFormatter"></el-table-column>
@@ -51,10 +51,10 @@
         <!-- <el-table-column prop="isMultiTenant" label="isMultiTenant"></el-table-column> -->
         <!-- <el-table-column prop="lastModificationTime" label="lastModificationTime"></el-table-column>
         <el-table-column prop="lastModifierId" label="lastModifierId"></el-table-column> -->
-        <el-table-column label="操作" width="160px">
+        <el-table-column label="操作" width="160px" fixed="right">
           <template slot-scope="scope">
             <el-button type="text" @click="modifyQuerier(scope.row)">修改</el-button>
-            <el-button type="text" @click="delQuerier(scope.row)">删除</el-button>
+            <el-button type="text" class="ky-btntxt-danger" @click="delQuerier(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>

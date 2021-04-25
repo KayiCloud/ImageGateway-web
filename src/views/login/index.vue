@@ -1,82 +1,34 @@
 <template>
   <div id="container">
-    <div class="fx_paper" :class="collapsed == false ? '' : 'fx_pager_m'">
+    <div class="fx_paper">
       <div class="fx_wrap login_wrap">
-        <el-form
-          :model="ruleForm"
-          :rules="rules"
-          ref="ruleForm"
-          label-position="right"
-          label-width="0px"
-          class="login-container"
-          @submit.native.prevent
-        >
-          <h3 class="fx_h3">
-            <img class="logo" src="~@/assets/images/logo-light.png" />
-          </h3>
-          <el-form-item prop="account" class="ipt-item">
-            <el-input
-              type="text"
-              v-model="ruleForm.account"
-              autocomplete="on"
-              placeholder="请输入用户名"
-              autofocus
-            >
-              <template slot="prepend">
-                <i class="fa fa-user fa-lg"></i>
-              </template>
-            </el-input>
-          </el-form-item>
-          <el-form-item prop="password" class="ipt-item" v-if="visible">
-            <el-input
-              type="password"
-              v-model="ruleForm.password"
-              autocomplete="on"
-              placeholder="请输入密码"
-            >
-              <i
-                slot="suffix"
-                class="el-icon-view el-input__icon"
-                title="显示密码"
-                @click="changePass('show')"
-                style="cursor: pointer"
-              ></i>
-              <template slot="prepend">
-                <i class="fa fa-key fa-lg"></i>
-              </template>
-            </el-input>
-          </el-form-item>
-          <el-form-item prop="password" class="ipt-item" v-else>
-            <el-input
-              type="text"
-              v-model="ruleForm.password"
-              autocomplete="on"
-              placeholder="请输入密码"
-            >
-              <i
-                slot="suffix"
-                class="el-icon-more el-input__icon"
-                title="隐藏密码"
-                @click="changePass('hide')"
-                style="cursor: pointer"
-              ></i>
-              <template slot="prepend">
-                <i class="fa fa-key fa-lg"></i>
-              </template>
-            </el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button
-              type="primary"
-              @click="handleSubmit"
-              :loading="logining"
-              style="width: 100%; height: 45px"
-            >
-              立即登录
-              <i class="fa fa-long-arrow-right" style="margin-left: 10px"></i>
-            </el-button>
-          </el-form-item>
-        </el-form>
+        <h3 class="fx_h3">
+          <template v-if="systemName">
+            <img class="logo_xs" src="~@/assets/images/logo-light.png">
+            <el-divider direction="vertical"></el-divider>
+            <span class="title">{{systemName}}</span>
+          </template>
+          <img v-else class="logo" src="~@/assets/images/logo-light.png" />
+        </h3>
+        <div class="mid_line"></div>
+        <div class="form_wrap">
+          <el-form  label-width="70px" :model="ruleForm" :rules="rules" ref="ruleForm">
+            <el-form-item label="用户名" prop="account">
+              <el-input id="form-username" v-model="ruleForm.account" placeholder="请输入用户名" clearable></el-input>
+            </el-form-item>
+            <el-form-item label="密码" prop="password">
+              <el-input type="password" v-model="ruleForm.password" placeholder="请输入密码" show-password clearable></el-input>
+            </el-form-item>
+            <el-form-item class="btn" label-width="0px">
+                <el-button
+                  :loading="logining"
+                  type="primary"
+                  @click="handleSubmit" >
+                  登录
+                </el-button>
+            </el-form-item>
+          </el-form>
+        </div>
       </div>
     </div>
   </div>
@@ -89,6 +41,7 @@ export default {
   name: "login",
   data() {
     return {
+      systemName: window.g?window.g.TITLE:'',
       logining: false,
       collapsed: false,
       ruleForm: {
@@ -213,64 +166,101 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$bg: #283443;
+$bg: #31414f;
 #container {
   width: 100%;
   height: 100%;
   position: relative;
   overflow: hidden;
   background-color: $bg;
+  .fx_paper {
+    display: flex;
+    width: 700px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    // border-radius: 8px;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    background-color: $bg;
+    // box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    // overflow: hidden;
+    .fx_wrap {
+      height: 100%;
+      .fx_h3 {
+        font-size: 30px;
+        text-align: center;
+        margin: 10px 0 20px;
+        padding-right: 20px;
+        .logo_xs {
+          width: 50%;
+          vertical-align: middle;
+        }
+        .logo {
+          width: 68%;
+          vertical-align: middle;
+        }
+        .title{
+          font-size: 26px;
+          font-weight: 500;
+          color: #fff;
+        }
+      }
+    }
+  }
+  .link{
+    cursor: pointer;
+    color: #409EFF;
+    position: absolute;
+    left: 25px;
+    bottom: 14px;
+  }
 }
-.fx_paper {
-  display: flex;
-  width: 400px;
-  height: 400px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border-radius: 8px;
-  justify-content: center;
-  transform: translate(-50%, -50%);
-  background-color: $bg;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
+.form_wrap /deep/ .el-form-item__content{
+  line-height: 35px;
 }
-.fx_pager_m {
-  width: 420px;
+.form_wrap /deep/ .el-form-item__label{
+  color: #fff;
+  line-height: 35px;
 }
-.fx_banner {
-  width: 440px;
-  height: 100%;
+.form_wrap /deep/ .el-form-item__label::before{
+  display: none;
 }
-.fx_wrap {
-  width: 560px;
-  height: 100%;
+.form_wrap /deep/ .el-input__inner{
+  height: 35px;
 }
-.login-container {
-  width: 330px;
+.form_wrap /deep/ .el-input{
+  width: 68%;
+}
+.form_wrap /deep/ .el-form-item__error{
+  padding-top: 0;
+}
+.form_wrap{
+  width: 500px;
   margin: 0 auto;
-  padding-top: 30px;
-  .fx_h3 {
-    font-size: 30px;
-    text-align: center;
-    color: rgb(62, 173, 109);
-    margin: 10px 0 40px;
-    img {
-      width: 100%;
-      vertical-align: middle;
+  // box-shadow: 3px 3px 3px 0px #293742 , 1px 1px 0px 0px #405565 inset;
+  padding: 40px 40px 25px;
+  position: relative;
+  .btn{
+    position: absolute;
+    display: inline-block;
+    top: 40px;
+    right: 45px;
+    .el-button{
+      width: 85px;
+      height: 85px;
     }
   }
 }
-.remember {
-  margin-bottom: 6px;
+.el-divider--vertical{
+  margin-left: -20px;
+  opacity: 0.5;
 }
-.swiper1 {
-  height: 100%;
-  background-color: #00c0ef;
-}
-.swiper2 {
-  height: 100%;
-  background-color: #606266;
+.mid_line{
+  opacity: 0.5;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(left bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
 }
 </style>
 

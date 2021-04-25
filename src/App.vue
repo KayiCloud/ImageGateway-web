@@ -84,4 +84,24 @@ body {
 .fade-leave-active {
   opacity: 0;
 }
+
+/*滚动条*/
+::-webkit-scrollbar-track-piece {
+  background-color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+  height: 13px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  background-clip: padding-box;
+  min-height: 28px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ddd;
+}
 </style>

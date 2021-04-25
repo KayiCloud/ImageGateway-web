@@ -1,11 +1,11 @@
 module.exports = {
-  title: '图像转发中间件管理',
+  title: '无极云转发管理',
   //顶部栏
   fixedHeader: true,
   //侧边栏logo
   sidebarLogo: true,
   //侧边栏title
-  sidebarTitle: '图像转发中间件管理',
+  sidebarTitle: '无极云转发管理',
   // 底部栏
   footer: false,
   //系统编号

@@ -56,7 +56,7 @@ export const getQuerierTenant = params => {
 }
 // 增
 export const postQuerier = params => {
-  return http.post("/api/querier", params)
+  return http.post(`/api/querier?tenantId=${params.tenantId}`, params)
 }
 // 修改
 export const putQuerier = params => {

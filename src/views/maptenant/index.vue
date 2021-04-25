@@ -41,10 +41,10 @@
         <el-table-column prop="code" label="编码" width="220px"></el-table-column>
         <el-table-column prop="mapCode" label="映射编码" min-width="220px"></el-table-column>
         <!-- <el-table-column prop="tenantId" label="tenantId"></el-table-column> -->
-        <el-table-column label="操作" width="160px">
+        <el-table-column label="操作" width="160px" fixed="right">
           <template slot-scope="scope">
             <el-button type="text" @click="modifyMap(scope.row)">修改</el-button>
-            <el-button type="text" @click="delMap(scope.row)">删除</el-button>
+            <el-button type="text" class="ky-btntxt-danger" @click="delMap(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>

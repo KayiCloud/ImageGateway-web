@@ -35,7 +35,7 @@
             <el-option v-for="(item,index) in styleOptions" :key="index" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="provider" prop="provider">
+        <el-form-item label="查询方式" prop="provider">
           <el-select v-model="formData.provider" @change="providerChange">
             <el-option 
               v-for="(item, index) in providerOptions"
@@ -79,7 +79,7 @@ export default {
     return {
       loading: false,
       querierType: 'add',
-      dialogTitle: 'querier新增',
+      dialogTitle: '查询器新增',
       querierDialog: false,
       formData: {
         id: '',
@@ -92,7 +92,7 @@ export default {
         items: []
       },
       rules: {
-        provider: [{required: true, message: 'provider不能为空！', trigger: 'blur'}],
+        provider: [{required: true, message: '查询方式不能为空！', trigger: 'blur'}],
         tenantId: [{required: true, message: '请选择租户！', trigger: 'blur'}],
         style: [{required: true, message: '样式不能为空！', trigger: 'blur'}],
         title: [{required: true, message: '标题不能为空！', trigger: 'blur'}],
@@ -116,7 +116,7 @@ export default {
   methods: {
     init(type, querierInfo){
       this.querierType = type
-      this.dialogTitle = type=='add'?'querier新增':'querier修改'
+      this.dialogTitle = type=='add'?'查询器新增':'查询器修改'
       this.querierDialog = true
 
       this.$nextTick(()=>{
@@ -205,7 +205,7 @@ export default {
         }
       }
     },
-    // provider 获取
+    // 查询方式 获取
     getProviderList(){
       getDataQueryProvider().then(res=>{
         if(res && res.code === 1){
@@ -213,7 +213,7 @@ export default {
         }
       })
     },
-    // provider 改变
+    // 查询方式 改变
     providerChange(){
       if(this.formData.provider){
         this.getProviderItems(this.formData.provider)
@@ -221,9 +221,9 @@ export default {
         this.providerItems = []
       }
     },
-    // provider item 选项获取
+    // 查询方式 item 选项获取
     getProviderItems(provider){
-      console.log('provider:',provider)
+      console.log('查询方式:',provider)
       getDataQueryProviderInfo({provider}).then(res=>{
         if(res && res.code === 1){
           this.providerItems = res.data.values

@@ -41,14 +41,14 @@ const menulist = [
     name: '主页',
     redirect: '/querier/manage',
     hidden: false,
-    meta: { title: 'querier管理', icon: 'iconfont iconbaifang_line' },
+    meta: { title: '查询器管理', icon: 'iconfont iconbaifang_line' },
     children: [
       {
         path: 'manage',
-        name: 'querier管理',
+        name: '查询器管理',
         remark: "querier",
         hidden: false,
-        meta: { title: 'querier管理' },
+        meta: { title: '查询器管理' },
         // children:[]
       }
     ]
