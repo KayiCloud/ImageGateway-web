@@ -54,6 +54,10 @@
         <el-form-item v-for="(item, index) in providerItems" :key="index" :label="item.localizationValue">
           <el-input
             v-model="item[`${item.name}`]"
+            :placeholder="
+              item.localizationValue === 'Required tenantId'?'如：false、true':
+              item.localizationValue === 'Url template'?'如：http://www.xxx.com、http://10.1.1.0:1234/api':''
+            "
           ></el-input>
         </el-form-item>
       </el-form>
