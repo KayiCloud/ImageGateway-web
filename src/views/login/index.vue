@@ -36,7 +36,7 @@
 
 <script>
 import { getMenu } from '@/utils/auth'
-
+// 1q2w3E*
 export default {
   name: 'Login',
   data() {
@@ -45,8 +45,8 @@ export default {
       logining: false,
       collapsed: false,
       ruleForm: {
-        account: 'admin',
-        password: '1q2w3E*'
+        account: '',
+        password: ''
       },
 
       rules: {

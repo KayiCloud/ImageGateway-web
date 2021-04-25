@@ -103,6 +103,12 @@ function checkStatus(response) {
   } else if (response && response.status === 204) {
     // 请求成功
     return { code: 1 }
+  } else if (response && response.status === 400) {
+    // 请求成功
+    if (response.data.error_description) {
+      bus.$message.error(response.data.error_description)
+    }
+    return { code: 1 }
   } else {
     if (response.data.error.message) {
       bus.$message.error(response.data.error.message)
