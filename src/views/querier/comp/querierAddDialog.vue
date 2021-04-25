@@ -24,8 +24,8 @@
         <el-form-item label="租户" prop="tenantId">
           <el-select filterable :disabled="querierType==='modify'" v-model="formData.tenantId">
             <el-option v-for="(item) in mx_tenantAll" :key="item.id" :label="item.name" :value="item.id">
-              <span style="float: left">{{ item.name }}</span>
-              <span style="float: right; color: #8492a6; font-size: 13px">{{ item.id.slice(0,8) }}</span>
+              <span style="float: left">{{item.name}}</span>
+              <span style="float: right; color: #8492a6; font-size: 13px">{{item.id.slice(0,8)}}</span>
             </el-option>
           </el-select>
           <!-- <el-input v-model="formData.tenantId"></el-input> -->
@@ -37,7 +37,7 @@
         </el-form-item>
         <el-form-item label="查询方式" prop="provider">
           <el-select v-model="formData.provider" @change="providerChange">
-            <el-option 
+            <el-option
               v-for="(item, index) in providerOptions"
               :key="index"
               :label="item.provider"
@@ -45,7 +45,7 @@
             ></el-option>
           </el-select>
         </el-form-item>
-        
+
       </el-form>
       <el-form
         class="provideritem_form"
@@ -75,7 +75,7 @@ import {
 import mxTenant from '@/mixins/tenant'
 export default {
   mixins: [mxTenant],
-  data(){
+  data() {
     return {
       loading: false,
       querierType: 'add',
@@ -92,37 +92,37 @@ export default {
         items: []
       },
       rules: {
-        provider: [{required: true, message: '查询方式不能为空！', trigger: 'blur'}],
-        tenantId: [{required: true, message: '请选择租户！', trigger: 'blur'}],
-        style: [{required: true, message: '样式不能为空！', trigger: 'blur'}],
-        title: [{required: true, message: '标题不能为空！', trigger: 'blur'}],
-        name: [{required: true, message: '名称不能为空！', trigger: 'blur'}]
+        provider: [{ required: true, message: '查询方式不能为空！', trigger: 'blur' }],
+        tenantId: [{ required: true, message: '请选择租户！', trigger: 'blur' }],
+        style: [{ required: true, message: '样式不能为空！', trigger: 'blur' }],
+        title: [{ required: true, message: '标题不能为空！', trigger: 'blur' }],
+        name: [{ required: true, message: '名称不能为空！', trigger: 'blur' }]
       },
       querierInfo: null,
       // provider
-      providerOptions:[],
+      providerOptions: [],
       providerItems: [],
 
       styleOptions: [
-        {value: 1, label: 'StudyInstanceUID'},
-        {value: 2, label: 'AccessionNo(访问号)'}
+        { value: 1, label: 'StudyInstanceUID' },
+        { value: 2, label: 'AccessionNo(访问号)' }
       ]
     }
   },
-  created(){
+  created() {
     this.getProviderList()
     this.mx_getTenantAll()
   },
   methods: {
-    init(type, querierInfo){
+    init(type, querierInfo) {
       this.querierType = type
-      this.dialogTitle = type=='add'?'查询器新增':'查询器修改'
+      this.dialogTitle = type === 'add' ? '查询器新增' : '查询器修改'
       this.querierDialog = true
 
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         this.$refs.querierForm.resetFields()
-        if(querierInfo && querierInfo.id){
-          this.querierInfo = {...querierInfo}
+        if (querierInfo && querierInfo.id) {
+          this.querierInfo = { ...querierInfo }
           this.formData.id = querierInfo.id
           this.formData.tenantId = querierInfo.tenantId
           this.formData.isMultiTenant = querierInfo.isMultiTenant
@@ -133,13 +133,13 @@ export default {
           this.formData.items = []
           // this.providerItems = querierInfo.items
         }
-        if(!this.formData.provider && this.providerOptions.length>0){
+        if (!this.formData.provider && this.providerOptions.length > 0) {
           this.formData.provider = this.providerOptions[0].provider
         }
         this.providerChange()
       })
     },
-    dialogClose(){
+    dialogClose() {
       this.formData.id = null
       this.formData.tenantId = null
       this.formData.isMultiTenant = true
@@ -162,41 +162,41 @@ export default {
       })
     },
     // 新增提交
-    async sendQuerier(){
+    async sendQuerier() {
       const valid = await this.validateFun('querierForm')
-      if(valid){
-        const params = {...this.formData}
+      if (valid) {
+        const params = { ...this.formData }
         let providerItem = []
         this.providerItems.forEach(item => {
           let _obj = {}
           _obj[`name`] = item.name
-          _obj[`value`] = item[`${item.name}`]?item[`${item.name}`]:''
-          if(item.id){
+          _obj[`value`] = item[`${item.name}`] ? item[`${item.name}`] : ''
+          if (item.id) {
             // 如果有itemid，项目为修改，需把itemid一起提交
             _obj[`id`] = item.id
           }
           providerItem.push(_obj)
         })
         params.items = [...providerItem]
-        params.tenantId = params.tenantId?params.tenantId:null
+        params.tenantId = params.tenantId ? params.tenantId : null
         // console.log(params)
         // return
         this.loading = true
-        if(this.querierType === 'add') {
+        if (this.querierType === 'add') {
           // 新增
-          postQuerier(params).then(res=>{
+          postQuerier(params).then(res => {
             this.loading = false
-            if(res && res.code === 1){
+            if (res && res.code === 1) {
               this.$message.success('新增成功~')
               this.querierDialog = false
               this.$emit('sendQuerierEdit')
             }
           })
-        }else if(this.querierType === 'modify') {
+        } else if (this.querierType === 'modify') {
           // 修改
-          putQuerier(params).then(res=>{
+          putQuerier(params).then(res => {
             this.loading = false
-            if(res && res.code === 1){
+            if (res && res.code === 1) {
               this.$message.success('修改成功~')
               this.querierDialog = false
               this.$emit('sendQuerierEdit')
@@ -206,40 +206,40 @@ export default {
       }
     },
     // 查询方式 获取
-    getProviderList(){
-      getDataQueryProvider().then(res=>{
-        if(res && res.code === 1){
+    getProviderList() {
+      getDataQueryProvider().then(res => {
+        if (res && res.code === 1) {
           this.providerOptions = res.data
         }
       })
     },
     // 查询方式 改变
-    providerChange(){
-      if(this.formData.provider){
+    providerChange() {
+      if (this.formData.provider) {
         this.getProviderItems(this.formData.provider)
-      }else{
+      } else {
         this.providerItems = []
       }
     },
     // 查询方式 item 选项获取
-    getProviderItems(provider){
-      console.log('查询方式:',provider)
-      getDataQueryProviderInfo({provider}).then(res=>{
-        if(res && res.code === 1){
+    getProviderItems(provider) {
+      console.log('查询方式:', provider)
+      getDataQueryProviderInfo({ provider }).then(res => {
+        if (res && res.code === 1) {
           this.providerItems = res.data.values
-          if(this.querierInfo && this.querierInfo.id && this.querierInfo.provider === provider){
+          if (this.querierInfo && this.querierInfo.id && this.querierInfo.provider === provider) {
             // 修改
             const _items = this.querierInfo.items
             this.providerItems.forEach(prov => {
               const _index = _items.findIndex(item => item.name === prov.name)
-              if(_index>=0){
+              if (_index >= 0) {
                 prov.id = _items[_index].id
                 prov[`${prov.name}`] = _items[_index].value
-              }else{
+              } else {
                 prov[`${prov.name}`] = null
               }
             })
-          }else{
+          } else {
             this.providerItems.forEach(prov => {
               prov[`${prov.name}`] = null
             })

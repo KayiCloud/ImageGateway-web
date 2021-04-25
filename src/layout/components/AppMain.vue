@@ -1,14 +1,14 @@
 <template>
   <section class="app-main" :class="!appMainHeight?'app-main-height':''">
     <transition name="fade-transform" mode="out-in">
-    <!-- <transition name="fade" mode="out-in"> -->
-      <router-view :key="key" />
+      <!-- <transition name="fade" mode="out-in"> -->
+      <router-view :key="key"/>
     </transition>
   </section>
 </template>
 
 <script>
-import {footer} from "@/settings"
+import { footer } from '@/settings'
 export default {
   name: 'AppMain',
   computed: {
@@ -16,13 +16,13 @@ export default {
       return this.$route.path
     }
   },
-  data(){
+  data() {
     return {
-      appMainHeight:true
+      appMainHeight: true
     }
   },
-  created(){
-    this.appMainHeight=footer
+  created() {
+    this.appMainHeight = footer
   }
 }
 </script>

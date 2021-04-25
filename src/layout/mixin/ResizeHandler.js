@@ -1,7 +1,7 @@
 import store from '@/store'
 
 const { body } = document
-const WIDTH = 992 
+const WIDTH = 992
 
 export default {
   watch: {

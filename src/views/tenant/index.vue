@@ -14,11 +14,18 @@
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="searchTenant" icon="el-icon-search"
-            >查询</el-button
+          <el-button
+            type="primary"
+            @click="searchTenant"
+            icon="el-icon-search"
+          >查询</el-button
           >
-          <el-button type="" plain @click="addTenant" icon="el-icon-plus"
-            >新增</el-button
+          <el-button
+            type=""
+            plain
+            @click="addTenant"
+            icon="el-icon-plus"
+          >新增</el-button
           >
         </el-form-item>
       </el-form>
@@ -86,54 +93,54 @@ export default {
       }
     }
   },
-  created(){
+  created() {
     this.getTenantList()
   },
   methods: {
     // 搜索
-    searchTenant(){
+    searchTenant() {
       this.currentPage = 1
       this.getTenantList()
     },
     // 租户列表数据请求
-    getTenantList(){
+    getTenantList() {
       const params = {
-        SkipCount: this.currentPage-1,
+        SkipCount: this.currentPage - 1,
         MaxResultCount: this.pageSize
       }
       this.loading = true
-      getMultiTenancyTenants(params).then(res=>{
+      getMultiTenancyTenants(params).then(res => {
         this.loading = false
-        if(res && res.code === 1){
+        if (res && res.code === 1) {
           this.tableData = res.data.items
           this.totalCount = res.data.totalCount
         }
       })
     },
     // 映射
-    mapTenant(row){
+    mapTenant(row) {
       this.$refs.tenantMap.init('add', row)
     },
     // 新增
-    addTenant(){
+    addTenant() {
       this.$refs.tenantAddDialog.init('add')
     },
     // 修改
-    modifyTenant(row){
+    modifyTenant(row) {
       this.$refs.tenantAddDialog.init('modify', row)
     },
     // 修改、新增弹框回调
-    tenantEditChange(){
+    tenantEditChange() {
       this.searchTenant()
       this.$refs.tenantMap.refreshMxTenantAll()
     },
     // 配置
-    tenantConfigEdit(row){
+    tenantConfigEdit(row) {
       this.$refs.tenantConfig.init(row)
     },
     // 删除
-    delTenant(row){
-      if(row.id){
+    delTenant(row) {
+      if (row.id) {
         this.$confirm('是否确认删除?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -142,16 +149,16 @@ export default {
           const params = {
             id: row.id
           }
-          this.loading=true
-          deleteMultiTenancyTenants(params).then(res=>{
-            this.loading=false
-            if(res && res.code === 1){
+          this.loading = true
+          deleteMultiTenancyTenants(params).then(res => {
+            this.loading = false
+            if (res && res.code === 1) {
               this.$message.success('租户删除成功！')
               this.searchTenant()
             }
           })
         }).catch(() => {})
-      }else{
+      } else {
         this.$message.warning('该租户不存在~')
       }
     }

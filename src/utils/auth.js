@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-import enc from "@/utils/enc"
+import enc from '@/utils/enc'
 
 const TokenInfo = 'IGW-TOKENINFO'
 const UserInfo = 'IGW-USERINFO'
@@ -7,14 +7,14 @@ const Expires = 'IGW-EXPIRES'
 const userMenu = 'IGW-USERMENU'
 const Tags = 'IGW-TAGS'
 const getLocalInfo = function (key) {
-  const _info = localStorage.getItem(key);
+  const _info = localStorage.getItem(key)
   const infoStr = !_info ? null : JSON.parse(aesEec(_info))
-  return infoStr;
+  return infoStr
 }
 const getCookieInfo = function (key) {
   const _info = Cookies.get(key)
   const infoStr = !_info ? null : JSON.parse(aesEec(_info))
-  return infoStr;
+  return infoStr
 }
 // 加密
 const aesEnc = function (val) {
@@ -24,7 +24,7 @@ const aesEnc = function (val) {
 const aesEec = function (val) {
   return enc.AESDecrypt(decodeURIComponent(val))
 }
-//Token 信息
+// Token 信息
 export function getTokenInfo() {
   return getCookieInfo(TokenInfo)
 }
@@ -34,9 +34,9 @@ export function setTokenInfo(tokenInfo) {
 export function removeTokenInfo() {
   return Cookies.remove(TokenInfo)
 }
-//Token 时间戳
+// Token 时间戳
 export function setExpires(expires) {
-  const _exp = Math.floor((new Date().getTime() + expires)/1000)
+  const _exp = Math.floor((new Date().getTime() + expires) / 1000)
   return Cookies.set(Expires, aesEnc(_exp))
 }
 export function getExpires() {
@@ -65,7 +65,7 @@ export function setMenu(info) {
 export function removeMenu() {
   return localStorage.removeItem(userMenu)
 }
-//用户操作权限
+// 用户操作权限
 export function getTags() {
   return getLocalInfo(Tags)
 }

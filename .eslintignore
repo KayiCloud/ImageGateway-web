@@ -1,0 +1,12 @@
+build/*.js
+src/assets
+# src/utils
+# src/api
+# src/router
+# src/store
+# src/data
+# src/layout
+src/utils/md5.js
+public
+dist
+config/*.js

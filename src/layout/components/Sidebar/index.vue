@@ -1,6 +1,6 @@
 <template>
   <div :class="{'has-logo':showLogo}">
-    <logo v-if="showLogo" :collapse="isCollapse" />
+    <logo v-if="showLogo" :collapse="isCollapse"/>
     <div v-if="!isCollapse && sidebarTitle" class="project_name">{{sidebarTitle}}</div>
     <!-- <div v-else class="project_name_sm">远协</div> -->
     <el-scrollbar wrap-class="scrollbar-wrapper">
@@ -30,7 +30,7 @@
 import { mapGetters } from 'vuex'
 import Logo from './Logo'
 import SidebarItem from './SidebarItem'
-import {sidebarTitle} from '@/settings'
+import { sidebarTitle } from '@/settings'
 // import variables from '@/styles/variables.scss'
 
 export default {
@@ -39,7 +39,7 @@ export default {
       menuBg: '#1f2d3d',
       menuText: '#bfcbd9',
       menuActiveText: '#00C0EF',
-      sidebarTitle:sidebarTitle
+      sidebarTitle: sidebarTitle
     }
   },
   components: { SidebarItem, Logo },

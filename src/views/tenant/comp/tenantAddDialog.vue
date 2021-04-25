@@ -52,19 +52,19 @@ import {
 } from '@/api/api'
 const pwdReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[$@$!%*?&#^\(\)~])[A-Za-z\d$@$!%*?&#^\(\)~]{6,}/
 export default {
-  data(){
+  data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入密码！'));
+        callback(new Error('请输入密码！'))
       } else {
         if (value.length < 6) {
-          callback(new Error('密码不能低于6位数！'));
+          callback(new Error('密码不能低于6位数！'))
         } else if (!pwdReg.test(value)) {
-          callback(new Error('密码格式不正确！'));
+          callback(new Error('密码格式不正确！'))
         }
         callback()
       }
-    };
+    }
     return {
       sendLoading: false,
       tenantType: 'add',
@@ -82,32 +82,32 @@ export default {
         extraProperties: {}
       },
       rules: {
-        name: [{required: true, message: '名称不能为空！', trigger: 'blur'}],
-        adminEmailAddress: [{required: true, message: '邮箱不能为空！', trigger: 'blur'}],
+        name: [{ required: true, message: '名称不能为空！', trigger: 'blur' }],
+        adminEmailAddress: [{ required: true, message: '邮箱不能为空！', trigger: 'blur' }],
         adminPassword: [
-          {required: true, message: '密码不能为空！', trigger: 'blur'},
-          {validator: validatePass, trigger: 'change'}
+          { required: true, message: '密码不能为空！', trigger: 'blur' },
+          { validator: validatePass, trigger: 'change' }
         ]
       }
     }
   },
   methods: {
-    init(type, tenantInfo){
+    init(type, tenantInfo) {
       this.tenantType = type
-      this.dialogTitle = type=='add'?'新增租户':'修改租户'
+      this.dialogTitle = type === 'add' ? '新增租户' : '修改租户'
       this.tenantDialog = true
-      if(tenantInfo){
-        this.tenantInfo = {...tenantInfo}
-        this.dialogTitle = this.dialogTitle+'【'+tenantInfo.name+'】'
+      if (tenantInfo) {
+        this.tenantInfo = { ...tenantInfo }
+        this.dialogTitle = this.dialogTitle + '【' + tenantInfo.name + '】'
       }
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         this.$refs.tenantForm.resetFields()
-        if(tenantInfo){
+        if (tenantInfo) {
           this.formtenant.name = tenantInfo.name
         }
       })
     },
-    dialogClose(){
+    dialogClose() {
       this.formtenant.name = ''
       this.formtenant.adminEmailAddress = ''
       this.formtenant.adminPassword = ''
@@ -123,14 +123,14 @@ export default {
       })
     },
     // 租户新增提交
-    async sendTenant(){
+    async sendTenant() {
       const valid = await this.validateFun('tenantForm')
-      if(valid){
-        const params = {...this.formtenant}
+      if (valid) {
+        const params = { ...this.formtenant }
         this.sendLoading = true
-        postMultiTenancyTenants(params).then(res=>{
+        postMultiTenancyTenants(params).then(res => {
           this.sendLoading = false
-          if(res && res.code === 1){
+          if (res && res.code === 1) {
             this.$message.success('新增成功！')
             this.tenantDialog = false
             this.$emit('tenantEditChange')
@@ -139,17 +139,17 @@ export default {
       }
     },
     // 租户修改提交
-    async sendTenantModify(){
+    async sendTenantModify() {
       const valid = await this.validateFun('tenantForm')
-      if(valid){
+      if (valid) {
         const params = {
           id: this.tenantInfo.id,
           name: this.formtenant.name
         }
         this.sendLoading = true
-        putMultiTenancyTenants(params).then(res=>{
+        putMultiTenancyTenants(params).then(res => {
           this.sendLoading = false
-          if(res && res.code === 1){
+          if (res && res.code === 1) {
             this.$message.success('修改成功！')
             this.tenantDialog = false
             this.$emit('tenantEditChange')

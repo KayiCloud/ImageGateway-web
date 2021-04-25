@@ -12,10 +12,10 @@ let routes = [
   { path: '/404', component: notFound, name: '404', hidden: true },
   {
     path: '/', component: layout, name: '主页', hidden: true, redirect: '/home', children: [
-      { path: 'home', component: home, name: '首页', hidden: true, meta: { title: '首页' } },
-      { path: 'updatepwd', component: resetpassword, name: '修改密码', hidden: true, meta: { title: '修改密码' } },
+      { path: 'home', component: home, name: '首页', hidden: true, meta: { title: '首页' }},
+      { path: 'updatepwd', component: resetpassword, name: '修改密码', hidden: true, meta: { title: '修改密码' }}
     ]
-  },
-];
+  }
+]
 
 export default routes

@@ -20,11 +20,18 @@
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="searchQuerier" icon="el-icon-search"
-            >查询</el-button
+          <el-button
+            type="primary"
+            @click="searchQuerier"
+            icon="el-icon-search"
+          >查询</el-button
           >
-          <el-button type="" plain @click="addTenant" icon="el-icon-plus"
-            >新增</el-button
+          <el-button
+            type=""
+            plain
+            @click="addTenant"
+            icon="el-icon-plus"
+          >新增</el-button
           >
         </el-form-item>
       </el-form>
@@ -35,7 +42,7 @@
           <template slot-scope="props">
             <el-form label-position="left" label-width="240px" class="querier-table-expand">
               <el-form-item v-for="(item, index) in props.row.items" :key="index" :label="item.name">
-                <span>{{ item.value }}</span>
+                <span>{{item.value}}</span>
               </el-form-item>
             </el-form>
           </template>
@@ -82,7 +89,7 @@ export default {
     paginationCont,
     querierAddDialog
   },
-  mixins:[mix_dateFormatter],
+  mixins: [mix_dateFormatter],
   data() {
     return {
       loading: false,
@@ -96,72 +103,72 @@ export default {
       }
     }
   },
-  created(){
+  created() {
     this.getQuerierList()
   },
   methods: {
     // 搜索
-    searchQuerier(){
+    searchQuerier() {
       this.currentPage = 1
       this.getQuerierList()
     },
     // 租户列表数据请求
-    getQuerierList(){
+    getQuerierList() {
       const params = {
         Name: this.formdata.Name,
         Provider: this.formdata.Provider,
-        SkipCount: this.currentPage-1,
+        SkipCount: this.currentPage - 1,
         MaxResultCount: this.pageSize
       }
       this.loading = true
-      getQuerier(params).then(res=>{
+      getQuerier(params).then(res => {
         this.loading = false
-        if(res && res.code === 1){
+        if (res && res.code === 1) {
           this.tableData = res.data.items
           this.totalCount = res.data.totalCount
         }
       })
     },
     // 新增
-    addTenant(){
+    addTenant() {
       this.$refs.querierAddDialog.init('add')
     },
     // 修改
-    modifyQuerier(row){
-      if(row.id){
+    modifyQuerier(row) {
+      if (row.id) {
         this.$refs.querierAddDialog.init('modify', row)
-      }else{
+      } else {
         this.$message.warning('该 querier 不存在')
       }
     },
     // 删除
-    delQuerier(row){
-      if(row.id){
+    delQuerier(row) {
+      if (row.id) {
         this.$confirm('是否确认删除?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
           this.loading = true
-          deleteQuerier({id: row.id}).then(res=>{
+          deleteQuerier({ id: row.id }).then(res => {
             this.loading = false
-            if(res && res.code === 1){
+            if (res && res.code === 1) {
               this.$message.success('删除成功~')
               this.getQuerierList()
             }
           })
         }).catch(() => {})
-      }else{
+      } else {
         this.$message.warning('该 querier 不存在')
       }
     },
     // querier 编辑返回
-    sendQuerierEdit(){
+    sendQuerierEdit() {
       this.getQuerierList()
     },
-    // style 
-    styleFlr(a, b, val){
-      switch(val){
+    // style
+    styleFlr(a, b, val) {
+      switch (val) {
         case 1:
           return 'StudyInstanceUID'
         case 2:

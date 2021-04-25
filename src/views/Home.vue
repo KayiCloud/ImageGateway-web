@@ -8,14 +8,14 @@
 export default {
   data() {
     return {
-      value: new Date(),
+      value: new Date()
 
-    };
+    }
   },
   methods: {
 
   }
-};
+}
 </script>
 
 <style scoped>

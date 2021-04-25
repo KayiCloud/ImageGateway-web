@@ -88,7 +88,6 @@ export default {
       if (this.autoScroll) {
         scrollTo(0, 800)
       }
-
     },
     handleSizeChange(val) {
       // console.log(`一页 ${val} 条`);
@@ -98,7 +97,7 @@ export default {
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

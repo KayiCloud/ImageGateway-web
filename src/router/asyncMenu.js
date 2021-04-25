@@ -2,4 +2,4 @@ const asyncMenu = [
 
 ]
 
-export default asyncMenu;
+export default asyncMenu

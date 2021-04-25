@@ -9,29 +9,29 @@
 
 <script>
 export default {
-  name: "App",
+  name: 'App',
   provide() {
     return {
       reload: this.reload
-    };
+    }
   },
   data() {
     return {
       isRouterAlive: true
-    };
+    }
   },
   mounted() {
   },
   methods: {
     reload() {
-      this.isRouterAlive = false;
+      this.isRouterAlive = false
       this.$nextTick(function () {
-        this.isRouterAlive = true;
-      });
-    },
+        this.isRouterAlive = true
+      })
+    }
   },
   components: {}
-};
+}
 </script>
 
 <style lang="scss">

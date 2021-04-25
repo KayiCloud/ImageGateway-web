@@ -1,10 +1,10 @@
 import Vue from 'vue'
 
 import 'normalize.css/normalize.css'
-import 'font-awesome/css/font-awesome.min.css';
+import 'font-awesome/css/font-awesome.min.css'
 // 引入element-ui
-import ElementUI from 'element-ui';
-import '@/theme/element-00C0EF/index.css';
+import ElementUI from 'element-ui'
+import '@/theme/element-00C0EF/index.css'
 
 // 兼容IE
 import 'babel-polyfill'
@@ -23,4 +23,4 @@ new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount("#app")
+}).$mount('#app')

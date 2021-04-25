@@ -59,7 +59,7 @@ import {
   getGatewayConfigurationInfo
 } from '@/api/api'
 export default {
-  data(){
+  data() {
     return {
       sendLoading: false,
       dialogTitle: '租户配置设置',
@@ -72,8 +72,8 @@ export default {
         describe: ''
       },
       rules: {
-        dataQueryId: [{required: true, message: '请选择 querier！', trigger: 'change'}],
-        name: [{required: true, message: '那么不能为空！', trigger: 'blur'}]
+        dataQueryId: [{ required: true, message: '请选择 querier！', trigger: 'change' }],
+        name: [{ required: true, message: '那么不能为空！', trigger: 'blur' }]
       },
       tenantInfo: {
         id: '',
@@ -84,24 +84,24 @@ export default {
     }
   },
   methods: {
-    init(tenantInfo){
+    init(tenantInfo) {
       this.querierDialog = true
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         this.$refs.querierForm.resetFields()
-        if(tenantInfo){
+        if (tenantInfo) {
           // 修改的租户信息
-          this.tenantInfo = {...tenantInfo}
+          this.tenantInfo = { ...tenantInfo }
           this.getGatewayInfo()
           this.getQuerierOptions()
         }
       })
     },
     // 弹框关闭
-    dialogClose(){
-      this.formquerier.id=''
-      this.formquerier.name=''
-      this.formquerier.dataQueryId=''
-      this.formquerier.describe=''
+    dialogClose() {
+      this.formquerier.id = ''
+      this.formquerier.name = ''
+      this.formquerier.dataQueryId = ''
+      this.formquerier.describe = ''
       this.tenantInfo = null
     },
     // 验证表单
@@ -115,9 +115,9 @@ export default {
       })
     },
     // 新增提交
-    async sendConfig(){
+    async sendConfig() {
       const valid = await this.validateFun('querierForm')
-      if(valid){
+      if (valid) {
         const params = {
           tenantId: this.tenantInfo.id,
           bodyObject: {
@@ -128,9 +128,9 @@ export default {
           }
         }
         this.sendLoading = true
-        postGatewayConfiguration(params).then(res=>{
+        postGatewayConfiguration(params).then(res => {
           this.sendLoading = false
-          if(res && res.code === 1){
+          if (res && res.code === 1) {
             this.$message.success('配置添加成功！')
             this.querierDialog = false
             this.$emit('tenantConfigChange')
@@ -139,14 +139,14 @@ export default {
       }
     },
     // 修改提交
-    async sendModify(){
+    async sendModify() {
       const valid = await this.validateFun('querierForm')
-      if(valid) {
-        const params = {...this.formquerier}
+      if (valid) {
+        const params = { ...this.formquerier }
         this.sendLoading = true
-        putGatewayConfiguration(params).then(res=>{
+        putGatewayConfiguration(params).then(res => {
           this.sendLoading = false
-          if(res && res.code === 1){
+          if (res && res.code === 1) {
             this.$message.success('配置修改成功！')
             this.querierDialog = false
             this.$emit('tenantConfigChange')
@@ -155,17 +155,17 @@ export default {
       }
     },
     // 获取租户配置
-    getGatewayInfo(){
-      getGatewayConfigurationInfo({tenantId:this.tenantInfo.id}).then(res=>{
-        if(res && res.code === 1){
-          this.formquerier={...res.data}
+    getGatewayInfo() {
+      getGatewayConfigurationInfo({ tenantId: this.tenantInfo.id }).then(res => {
+        if (res && res.code === 1) {
+          this.formquerier = { ...res.data }
         }
       })
     },
     // querier 获取
-    getQuerierOptions(){
-      getQuerierTenant({tenantId:this.tenantInfo.id}).then(res=>{
-        if(res && res.code === 1){
+    getQuerierOptions() {
+      getQuerierTenant({ tenantId: this.tenantInfo.id }).then(res => {
+        if (res && res.code === 1) {
           this.querierOptions = res.data
         }
       })

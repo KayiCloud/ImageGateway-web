@@ -1,21 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import routes from './routes'
-import MenuUtils from '@/utils/menuUtils.js';
+import MenuUtils from '@/utils/menuUtils.js'
 import { getMenu } from '../utils/auth'
 
 Vue.use(Router)
 
 const createRouter = () => new Router({
-  mode: "history",
+  mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
   routes
 })
 
 const router = createRouter()
 
-//在路由跳转的时候同一个路由多次添加是不被允许的
-//重写路由的push方法
+// 在路由跳转的时候同一个路由多次添加是不被允许的
+// 重写路由的push方法
 const VueRouterPush = Router.prototype.push
 Router.prototype.push = function push(to) {
   return VueRouterPush.call(this, to).catch(err => err)

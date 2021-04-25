@@ -1,4 +1,4 @@
-import enc from "@/utils/enc"
+import enc from '@/utils/enc'
 const _enc = {
   data() {
     return {

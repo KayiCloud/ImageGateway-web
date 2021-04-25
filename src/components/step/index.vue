@@ -12,7 +12,7 @@
           <span slot="title">{{item.title}}</span>
           <span slot="description">
             {{item.description}}
-            <br />
+            <br/>
             {{item.time}}
           </span>
         </el-step>
@@ -43,9 +43,9 @@
 </template>
 
 <script>
-import { RemoteApplyProcessGetList, RemoteAllocateGetList } from "@/api/api.js"
+import { RemoteApplyProcessGetList, RemoteAllocateGetList } from '@/api/api.js'
 export default {
-  name: 'step',
+  name: 'Step',
   data() {
     return {
       applyId: '',
@@ -59,30 +59,30 @@ export default {
       ProcessList: [],
       messageList: [],
       processStatus: 'finish',
-      stepActive: -1,//步骤
+      stepActive: -1// 步骤
     }
   },
   methods: {
     getProcessList(row) {
-      const that = this;
-      this.applyId = row.id;
+      const that = this
+      this.applyId = row.id
       that.stepData = [
         { title: '申请完成', description: '', time: '' },
         { title: '前质控完成', description: '', time: '' },
         { title: '分配完成', description: '', time: '' },
         { title: '报告完成', description: '', time: '' },
         { title: '后质控完成', description: '', time: '' }
-      ];
+      ]
       that.processStatus = 'finish'
       that.stepActive = -1
       if (this.applyId) {
         let params = {
-          applyId: this.applyId,
+          applyId: this.applyId
         }
         RemoteApplyProcessGetList(params).then(res => {
-          if (res && res.code == 10000) {
+          if (res && res.code === 10000) {
             that.ProcessList = res.content.list
-            //流程当前步骤
+            // 流程当前步骤
             that.ProcessList.forEach((item, index) => {
               const _idx = this.processApplyStatus(item.applyStatus)
               if (_idx >= 0) {
@@ -90,55 +90,55 @@ export default {
                 that.stepData[_idx].time = item.updateTime
               }
             })
-            that.stepActive = row.applyStatus == '8' ? 6 : this.processApplyStatus(row.applyStatus)
-            //会诊当前状态
-            if (row.returnType != '0' && row.returnType != null && row.returnType != '') {
-              //退回状态:0.正常  1.申请退回 2.接诊退回 3.报告退回
-              that.processStatus = row.returnType == 0 ? 'finish' : 'error';
+            that.stepActive = row.applyStatus === '8' ? 6 : this.processApplyStatus(row.applyStatus)
+            // 会诊当前状态
+            if (row.returnType !== '0' && row.returnType != null && row.returnType !== '') {
+              // 退回状态:0.正常  1.申请退回 2.接诊退回 3.报告退回
+              that.processStatus = row.returnType === 0 ? 'finish' : 'error'
             }
           }
         })
-        that.getMessageList();
+        that.getMessageList()
       }
     },
     // 当前会诊状态
     processApplyStatus(applyStatus) {
-      let active = -1;
-      if (applyStatus != null && applyStatus != '') {
+      let active = -1
+      if (applyStatus != null && applyStatus !== '') {
         switch (applyStatus) {
-          case "1":
-          case "2":
-          case "3":
+          case '1':
+          case '2':
+          case '3':
             active = applyStatus - 1
-            break;
-          case "4":
-          case "5":
+            break
+          case '4':
+          case '5':
             active = applyStatus - 2
-            break;
-          case "6":
-          case "7":
-          case "8":
+            break
+          case '6':
+          case '7':
+          case '8':
             active = 4
-            break;
+            break
         }
       }
-      return active;
+      return active
     },
     // 获取会诊留言
     getMessageList() {
-      const that = this;
+      const that = this
       let params = {
-        applyId: that.applyId,
+        applyId: that.applyId
       }
-      that.messageList = [];
+      that.messageList = []
       RemoteAllocateGetList(params).then(res => {
-        if (res && res.code == 10000) {
+        if (res && res.code === 10000) {
           that.messageList = res.content.list
         }
       })
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

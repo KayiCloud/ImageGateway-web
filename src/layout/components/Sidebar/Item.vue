@@ -20,7 +20,7 @@ export default {
     const { icon, title, svg } = context.props
     const vnodes = []
     if (icon) {
-      //<i :class="item.imageurl"></i>
+      // <i :class="item.imageurl"></i>
       if (icon.indexOf('svg') >= 0) {
         vnodes.push(<svg-icon icon-class={icon.split('-')[1]} />)
       } else {

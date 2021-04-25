@@ -1,6 +1,6 @@
 import {
   userLogin
-} from "@/api/api.js"
+} from '@/api/api.js'
 import {
   getTokenInfo,
   setTokenInfo,
@@ -15,23 +15,23 @@ import {
   removeMenu,
   removeTags
 } from '@/utils/auth'
-import {
-  hex_md5
-} from '@/utils/md5.js'
+// import {
+//   hex_md5
+// } from '@/utils/md5.js'
 import router from '@/router'
-import MenuUtils from "@/utils/menuUtils.js"
-import asyncMenu from "@/router/asyncMenu.js"
-import menulistjson from "@/data/menulistjson.js"
-import avatar from "@/assets/images/avatar2.jpg"
-import { isLocal } from "@/settings.js"
+import MenuUtils from '@/utils/menuUtils.js'
+import asyncMenu from '@/router/asyncMenu.js'
+import menulistjson from '@/data/menulistjson.js'
+import avatar from '@/assets/images/avatar2.jpg'
+import { isLocal } from '@/settings.js'
 
 let userNameLocal = ''
 let _userInfo = getUserInfo()
 let _tokenInfo = getTokenInfo()
 const getDefaultState = () => {
   return {
-    tokenInfo: !_tokenInfo ? '': _tokenInfo,
-    token: !_tokenInfo ? '': _tokenInfo.access_token,
+    tokenInfo: !_tokenInfo ? '' : _tokenInfo,
+    token: !_tokenInfo ? '' : _tokenInfo.access_token,
     tokenExpires: getExpires() * 1,
     userName: !_userInfo ? null : _userInfo.userName,
     avatar: avatar,
@@ -75,7 +75,7 @@ const actions = {
       // grant_type=password&username=admin&password=1q2w3E*&client_id=ImageGateway_App&client_secret=1q2w3e*&scope=ImageGateway
       const {
         account,
-        password,
+        password
       } = userInfo
       // const pwd = hex_md5(password).toUpperCase();
       return new Promise((resolve, reject) => {
@@ -106,7 +106,6 @@ const actions = {
     }
   },
 
-
   // 刷新令牌
   setNewTokenInfo({
     commit
@@ -125,12 +124,12 @@ const actions = {
     state
   }) {
     return new Promise((resolve, reject) => {
-      //logout(state.token).then(() => {
+      // logout(state.token).then(() => {
       removeTokenInfo() // 移除token信息
-      removeUserInfo() //移除用户信息
-      removeExpires();
-      removeTags();
-      removeMenu();
+      removeUserInfo() // 移除用户信息
+      removeExpires()
+      removeTags()
+      removeMenu()
       commit('RESET_STATE')
       resolve()
       // }).catch(error => {
@@ -171,7 +170,7 @@ const actions = {
   }) {
     return new Promise((resolve, reject) => {
       const content = {
-        userName: userNameLocal?userNameLocal:'local',
+        userName: userNameLocal || 'local',
         userCode: 'local',
         hospitalId: 'local',
         hospitalCode: 'local',
@@ -187,33 +186,33 @@ const actions = {
     commit
   }) {
     return new Promise((resolve, reject) => {
-      //遍历更新菜单格式
+      // 遍历更新菜单格式
       let menuData = menulistjson
       if (menuData != null) {
         // 遍历添加本地，菜单隐藏路由配置
         menuData = menuData.map((item) => {
-          const asyncMenuIdx = asyncMenu.findIndex((value) => value.path == item.path);
+          const asyncMenuIdx = asyncMenu.findIndex((value) => value.path === item.path)
           if (asyncMenuIdx >= 0) {
             const _child = asyncMenu[asyncMenuIdx].children
-            asyncMenu.splice(asyncMenuIdx, 1);
-            item.children = item.children.concat(_child);
+            asyncMenu.splice(asyncMenuIdx, 1)
+            item.children = item.children.concat(_child)
           }
-          return item;
-        });
+          return item
+        })
         menuData = menuData.concat(asyncMenu)
 
-        menuData = JSON.stringify(menuData).toLowerCase(); //所有的key转换成小写
-        setMenu(menuData);
+        menuData = JSON.stringify(menuData).toLowerCase() // 所有的key转换成小写
+        setMenu(menuData)
       }
-      router.options.routes = [];
-      let routes = [];
+      router.options.routes = []
+      let routes = []
       if (menuData.length > 0) {
-        MenuUtils(routes, menuData);
+        MenuUtils(routes, menuData)
         router.options.routes = Object.assign(
           router.options.routes,
           routes
-        );
-        router.addRoutes(routes);
+        )
+        router.addRoutes(routes)
       }
       resolve()
     })

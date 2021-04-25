@@ -8,11 +8,11 @@
             <el-divider direction="vertical"></el-divider>
             <span class="title">{{systemName}}</span>
           </template>
-          <img v-else class="logo" src="~@/assets/images/logo-light.png" />
+          <img v-else class="logo" src="~@/assets/images/logo-light.png"/>
         </h3>
         <div class="mid_line"></div>
         <div class="form_wrap">
-          <el-form  label-width="70px" :model="ruleForm" :rules="rules" ref="ruleForm">
+          <el-form label-width="70px" :model="ruleForm" :rules="rules" ref="ruleForm">
             <el-form-item label="用户名" prop="account">
               <el-input id="form-username" v-model="ruleForm.account" placeholder="请输入用户名" clearable></el-input>
             </el-form-item>
@@ -20,12 +20,12 @@
               <el-input type="password" v-model="ruleForm.password" placeholder="请输入密码" show-password clearable></el-input>
             </el-form-item>
             <el-form-item class="btn" label-width="0px">
-                <el-button
-                  :loading="logining"
-                  type="primary"
-                  @click="handleSubmit" >
-                  登录
-                </el-button>
+              <el-button
+                :loading="logining"
+                type="primary"
+                @click="handleSubmit">
+                登录
+              </el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -38,56 +38,56 @@
 import { getMenu } from '@/utils/auth'
 
 export default {
-  name: "login",
+  name: 'Login',
   data() {
     return {
-      systemName: window.g?window.g.TITLE:'',
+      systemName: window.g ? window.g.TITLE : '',
       logining: false,
       collapsed: false,
       ruleForm: {
-        account: "admin",
-        password: "1q2w3E*"
+        account: 'admin',
+        password: '1q2w3E*'
       },
 
       rules: {
         account: [
           {
             required: true,
-            message: "请输入用户名",
-            trigger: "blur"
+            message: '请输入用户名',
+            trigger: 'blur'
           }
         ],
         password: [
           {
             required: true,
-            message: "请输入密码",
-            trigger: "blur"
+            message: '请输入密码',
+            trigger: 'blur'
           }
         ]
       },
       visible: true,
-      redirect: "",
-      otherQuery: "",
+      redirect: '',
+      otherQuery: '',
       corpId: 'dingd55b04400e53d11cbc961a6cb783455b',
       code: ''
-    };
+    }
   },
   created() {
-    this.keyupSubmit(); //回车登录
+    this.keyupSubmit() // 回车登录
   },
   mounted() {
     if (document.documentElement.clientWidth <= 750) {
-      //移动端适配
-      this.collapsed = true;
+      // 移动端适配
+      this.collapsed = true
     }
   },
   watch: {
     $route: {
       handler: function (route) {
-        const query = route.query;
+        const query = route.query
         if (query) {
-          this.redirect = query.redirect;
-          this.otherQuery = this.getOtherQuery(query);
+          this.redirect = query.redirect
+          this.otherQuery = this.getOtherQuery(query)
         }
       }
     }
@@ -95,34 +95,34 @@ export default {
   methods: {
     handleOpen() {
       this.$nextTick(function () {
-        let doc = document.getElementById("codeInput");
-        doc.focus();
-      });
+        let doc = document.getElementById('codeInput')
+        doc.focus()
+      })
     },
     keyupSubmit() {
-      //回车登录
+      // 回车登录
       document.onkeydown = e => {
-        let _key = window.event.keyCode;
+        let _key = window.event.keyCode
         if (_key === 13) {
-          this.handleSubmit();
+          this.handleSubmit()
         }
-      };
+      }
     },
     handleSubmit() {
-      let that = this;
+      let that = this
 
       this.$refs.ruleForm.validate(valid => {
         if (valid) {
-          this.logining = true;
+          this.logining = true
           var loginParams = {
             account: this.ruleForm.account,
             password: this.ruleForm.password
-          };
+          }
 
           that.$store
-            .dispatch("user/login", loginParams)
+            .dispatch('user/login', loginParams)
             .then(res => {
-              //登录成功
+              // 登录成功
               // that.$message.success("登录成功！")
               const _path = this.flrPath()
               that.$router.push({
@@ -133,16 +133,16 @@ export default {
             })
             .catch(() => {
               that.logining = false
-            });
+            })
         } else {
-          return false;
+          return false
         }
-      });
+      })
     },
     flrPath() {
       // 判断设置的几个目录是否存在
       const menuList = getMenu()
-      const menu = menuList?JSON.stringify(menuList):''
+      const menu = menuList ? JSON.stringify(menuList) : ''
       if (!menu) return '/'
       if (menu.indexOf('/tenant/manage') >= 0) {
         return '/tenant/manage'
@@ -151,18 +151,18 @@ export default {
       }
     },
     changePass(value) {
-      this.visible = !(value === "show");
+      this.visible = !(value === 'show')
     },
     getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {
-        if (cur !== "redirect") {
-          acc[cur] = query[cur];
+        if (cur !== 'redirect') {
+          acc[cur] = query[cur]
         }
-        return acc;
-      }, {});
+        return acc
+      }, {})
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,4 +1,4 @@
-import http from "api/http.js"
+import http from 'api/http.js'
 /**
  * post、get、put
  * http.post('url', params, 'query');
@@ -18,16 +18,16 @@ import http from "api/http.js"
 
 // 系统用户登录 (获取 Jwt 授权数据)
 export const userLogin = params => {
-  return http.post("/connect/token", params)
+  return http.post('/connect/token', params)
 }
 
 // 获取租户列表 ========================================
 export const getMultiTenancyTenants = params => {
-  return http.get("/api/multi-tenancy/tenants", params, 'query')
+  return http.get('/api/multi-tenancy/tenants', params, 'query')
 }
 // 所有租户数据
 export const getMultiTenancyTenantsAll = params => {
-  return http.get("/api/multi-tenancy/tenants/get-all", params, 'query')
+  return http.get('/api/multi-tenancy/tenants/get-all', params, 'query')
 }
 // 详情
 export const getMultiTenancyTenantInfo = params => {
@@ -35,7 +35,7 @@ export const getMultiTenancyTenantInfo = params => {
 }
 // 增
 export const postMultiTenancyTenants = params => {
-  return http.post("/api/multi-tenancy/tenants", params)
+  return http.post('/api/multi-tenancy/tenants', params)
 }
 // 改
 export const putMultiTenancyTenants = params => {
@@ -48,7 +48,7 @@ export const deleteMultiTenancyTenants = params => {
 
 // Querier  =============================================
 export const getQuerier = params => {
-  return http.get("/api/querier", params, 'query')
+  return http.get('/api/querier', params, 'query')
 }
 // 获取租户绑定的 querier
 export const getQuerierTenant = params => {
@@ -60,7 +60,7 @@ export const postQuerier = params => {
 }
 // 修改
 export const putQuerier = params => {
-  return http.put("/api/querier", params)
+  return http.put('/api/querier', params)
 }
 // 删
 export const deleteQuerier = params => {
@@ -73,7 +73,7 @@ export const getQuerierInfo = params => {
 
 // data-query-provider ===============================================
 export const getDataQueryProvider = params => {
-  return http.get("/api/data-query-provider", params, 'query')
+  return http.get('/api/data-query-provider', params, 'query')
 }
 // 详情
 export const getDataQueryProviderInfo = params => {
@@ -82,7 +82,7 @@ export const getDataQueryProviderInfo = params => {
 
 // data-query-provider  querier ================================================
 export const getGatewayConfiguration = params => {
-  return http.get("/api/gateway-configuration", params, 'query')
+  return http.get('/api/gateway-configuration', params, 'query')
 }
 // 详情
 export const getGatewayConfigurationInfo = params => {
@@ -90,16 +90,16 @@ export const getGatewayConfigurationInfo = params => {
 }
 // 增
 export const postGatewayConfiguration = params => {
-  return http.post("/api/gateway-configuration", params, 'query', 'queryAndBody')
+  return http.post('/api/gateway-configuration', params, 'query', 'queryAndBody')
 }
 // 修改
 export const putGatewayConfiguration = params => {
-  return http.put("/api/gateway-configuration", params)
+  return http.put('/api/gateway-configuration', params)
 }
 
 // map-tenant 租户编码映射 ================================================
 export const getMapTenant = params => {
-  return http.get("/api/map-tenant", params, 'query')
+  return http.get('/api/map-tenant', params, 'query')
 }
 // 详情
 export const getMapTenantById = params => {
@@ -110,17 +110,14 @@ export const getMapTenantByCode = params => {
 }
 // 增
 export const postMapTenant = params => {
-  return http.post("/api/map-tenant", params)
+  return http.post('/api/map-tenant', params)
 }
 // 改
 export const putMapTenant = params => {
-  return http.put("/api/map-tenant", params)
+  return http.put('/api/map-tenant', params)
 }
 // 删
 export const deleteMapTenant = params => {
   return http.delete(`/api/map-tenant/${params.id}`, params)
 }
-
-
-
 

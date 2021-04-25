@@ -26,11 +26,18 @@
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="search" icon="el-icon-search"
-            >查询</el-button
+          <el-button
+            type="primary"
+            @click="search"
+            icon="el-icon-search"
+          >查询</el-button
           >
-          <el-button type="" plain @click="addMapTenant" icon="el-icon-plus"
-            >新增</el-button
+          <el-button
+            type=""
+            plain
+            @click="addMapTenant"
+            icon="el-icon-plus"
+          >新增</el-button
           >
         </el-form-item>
       </el-form>
@@ -73,7 +80,7 @@ export default {
     paginationCont,
     tenantMap
   },
-  mixins:[mix_dateFormatter],
+  mixins: [mix_dateFormatter],
   data() {
     return {
       loading: false,
@@ -88,63 +95,63 @@ export default {
       }
     }
   },
-  created(){
+  created() {
     this.getList()
   },
   methods: {
     // 搜索
-    search(){
+    search() {
       this.currentPage = 1
       this.getList()
     },
     // 列表数据请求
-    getList(){
+    getList() {
       const params = {
         Code: this.formdata.Code,
         TenantId: this.formdata.TenantId,
         MapCode: this.formdata.MapCode,
-        SkipCount: this.currentPage-1,
+        SkipCount: this.currentPage - 1,
         MaxResultCount: this.pageSize
       }
       this.loading = true
-      getMapTenant(params).then(res=>{
+      getMapTenant(params).then(res => {
         this.loading = false
-        if(res && res.code === 1){
+        if (res && res.code === 1) {
           this.tableData = res.data.items
           this.totalCount = res.data.totalCount
         }
       })
     },
     // 新增
-    addMapTenant(){
+    addMapTenant() {
       this.$refs.tenantMap.init('add')
     },
     // 修改
-    modifyMap(row){
-      if(row.id){
+    modifyMap(row) {
+      if (row.id) {
         this.$refs.tenantMap.init('modify', row)
-      }else{
+      } else {
         this.$message.warning('该编码映射不存在~')
       }
     },
     // 删除
     delMap(row) {
-      if(row.id) {
+      if (row.id) {
         this.$confirm('是否确认删除?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
           this.loading = true
-          deleteMapTenant({id: row.id}).then(res=>{
+          deleteMapTenant({ id: row.id }).then(res => {
             this.loading = false
-            if(res && res.code === 1){
+            if (res && res.code === 1) {
               this.$message.success('删除成功~')
               this.getList()
             }
           })
         }).catch(() => {})
-      }else{
+      } else {
         this.$message.warning('该编码映射不存在~')
       }
     }

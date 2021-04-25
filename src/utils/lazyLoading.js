@@ -1,33 +1,27 @@
 // vue components  列表数据字段名对应 Remark
-const layout = import('@/layout/index.vue'); //外层框架
-const home = import('@/views/Home.vue'); //主页
+const layout = import('@/layout/index.vue') // 外层框架
+const home = import('@/views/Home.vue') // 主页
 
-const tenant = import('@/views/tenant/index.vue'); // 租户管理
-const maptenant = import('@/views/maptenant/index.vue'); // 映射编码管理
-const querier = import('@/views/querier/index.vue'); // 查询器管理
+const tenant = import('@/views/tenant/index.vue') // 租户管理
+const maptenant = import('@/views/maptenant/index.vue') // 映射编码管理
+const querier = import('@/views/querier/index.vue') // 查询器管理
 
 function look(n) {
   switch (n) {
     case 'home':
-      return home;
-      break;
+      return home
     case 'layout':
-      return layout;
-      break;
+      return layout
     case 'tenant':
-      return tenant;
-      break;
+      return tenant
     case 'maptenant':
-      return maptenant;
-      break;
+      return maptenant
     case 'querier':
-      return querier;
-      break;
+      return querier
 
     default:
-      return home;
-      break;
+      return home
   }
 }
 
-export default (name) => () => look(name);
+export default (name) => () => look(name)

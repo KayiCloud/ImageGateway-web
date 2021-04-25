@@ -12,7 +12,7 @@
         <el-dropdown class="avatar-container" trigger="click">
           <div class="avatar-wrapper">
             <div class="user_name" :title="name">{{name}}</div>
-            <img :src="avatar" class="user-avatar" />
+            <img :src="avatar" class="user-avatar"/>
           </div>
           <el-dropdown-menu slot="dropdown" class="user-dropdown">
             <!-- <router-link to="/updatepwd">
@@ -29,63 +29,63 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
-import Breadcrumb from "@/components/Breadcrumb"
-import Hamburger from "@/components/Hamburger"
-import bus from "@/api/bus"
+import { mapGetters } from 'vuex'
+// import Breadcrumb from '@/components/Breadcrumb'
+import Hamburger from '@/components/Hamburger'
+import bus from '@/api/bus'
 
 export default {
   data() {
     return {
-      unRead: 0,
-    };
+      unRead: 0
+    }
   },
   components: {
-    Breadcrumb,
+    // Breadcrumb,
     Hamburger
   },
   computed: {
-    ...mapGetters(["sidebar", "pathname", "avatar", "name"])
+    ...mapGetters(['sidebar', 'pathname', 'avatar', 'name'])
   },
   filters: {
     ageFlr(val) {
       if (!val) return '-'
       const _v = val.indexOf('岁') >= 0 ? val : val + '岁'
-      return _v;
+      return _v
     }
   },
   mounted() {
-    this.fetchData();
+    this.fetchData()
     bus.$on('refreshMsgBadge', () => {
-      this.fetchData();
-    });
+      this.fetchData()
+    })
   },
   methods: {
     fetchData() {
       this.unRead = 0
       // getUnReadMessage().then(res=>{
       //   if(res && res.code == 10000){
-      //     this.unRead = res.content 
+      //     this.unRead = res.content
       //   }
       // })
     },
     handleSelect(key) {
       this.$router.push({
-        path: "/message",
+        path: '/message',
         query: {
           activeTab: key
         }
-      });
+      })
     },
     toggleSideBar() {
-      this.$store.dispatch("app/toggleSideBar");
+      this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
-      await this.$store.dispatch("user/logout");
-      this.$router.push(`/login`);
+      await this.$store.dispatch('user/logout')
+      this.$router.push(`/login`)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

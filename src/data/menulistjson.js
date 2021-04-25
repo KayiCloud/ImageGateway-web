@@ -1,7 +1,7 @@
 const menulist = [
   {
     path: '/tenant',
-    remark: "layout",
+    remark: 'layout',
     name: '主页',
     redirect: '/tenant/manage',
     hidden: false,
@@ -10,16 +10,16 @@ const menulist = [
       {
         path: 'manage',
         name: '租户管理',
-        remark: "tenant",
+        remark: 'tenant',
         hidden: false,
-        meta: { title: '租户管理' },
+        meta: { title: '租户管理' }
         // children:[]
       }
     ]
   },
   {
     path: '/maptenant',
-    remark: "layout",
+    remark: 'layout',
     name: '主页',
     redirect: '/maptenant/manage',
     hidden: false,
@@ -28,16 +28,16 @@ const menulist = [
       {
         path: 'manage',
         name: '映射编码',
-        remark: "maptenant",
+        remark: 'maptenant',
         hidden: false,
-        meta: { title: '映射编码' },
+        meta: { title: '映射编码' }
         // children:[]
       }
     ]
   },
   {
     path: '/querier',
-    remark: "layout",
+    remark: 'layout',
     name: '主页',
     redirect: '/querier/manage',
     hidden: false,
@@ -46,9 +46,9 @@ const menulist = [
       {
         path: 'manage',
         name: '查询器管理',
-        remark: "querier",
+        remark: 'querier',
         hidden: false,
-        meta: { title: '查询器管理' },
+        meta: { title: '查询器管理' }
         // children:[]
       }
     ]

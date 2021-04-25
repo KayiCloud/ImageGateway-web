@@ -118,30 +118,30 @@
 
 <script>
 // import { putSysUserChangePasswordByEncrypt } from "@/api/api.js"
-import { hex_md5 } from '@/utils/md5.js'
+// import { hex_md5 } from '@/utils/md5.js'
 export default {
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入新密码'));
+        callback(new Error('请输入新密码'))
       } else {
         if (value.length < 6) {
-          callback(new Error('密码不能低于6位数'));
+          callback(new Error('密码不能低于6位数'))
         } else if (this.pwdform.checkPass !== '') {
-          this.$refs.pwdform.validateField('checkPass');
+          this.$refs.pwdform.validateField('checkPass')
         }
-        callback();
+        callback()
       }
-    };
+    }
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请再次输入新密码'));
+        callback(new Error('请再次输入新密码'))
       } else if (value !== this.pwdform.pass) {
-        callback(new Error('两次输入新密码不一致!'));
+        callback(new Error('两次输入新密码不一致!'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       loading: false,
       visible1: false,
@@ -161,7 +161,7 @@ export default {
         ],
         checkPass: [
           { required: true, validator: validatePass2, trigger: 'blur' }
-        ],
+        ]
       },
       level: 0
     }
@@ -173,16 +173,16 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      const that = this;
+      const that = this
 
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          that.loading = true;
-          const params = {
-            oldPassword: hex_md5(that.pwdform.password).toUpperCase(),
-            newPassword: hex_md5(that.pwdform.pass).toUpperCase(),
-            confirmPassword: hex_md5(that.pwdform.checkPass).toUpperCase()
-          }
+          that.loading = true
+          // const params = {
+          //   oldPassword: hex_md5(that.pwdform.password).toUpperCase(),
+          //   newPassword: hex_md5(that.pwdform.pass).toUpperCase(),
+          //   confirmPassword: hex_md5(that.pwdform.checkPass).toUpperCase()
+          // }
           // putSysUserChangePasswordByEncrypt(params).then((res) => {
           //   if (res && res.code == 10000) {
           //     that.$message.success("密码修改成功！");
@@ -190,47 +190,46 @@ export default {
           //     that.pwdform.pass = ''
           //     that.pwdform.checkPass = ''
           //   }
-          that.loading = false;
+          that.loading = false
           // })
         } else {
-          return false;
+          return false
         }
-      });
+      })
     },
     AnalyzePasswordSecurityLevel(password) {
-      let securityLevelFlag = 0;
+      let securityLevelFlag = 0
       if (password.length < 6) {
-        return 0;
-      }
-      else {
+        return 0
+      } else {
         if (/[a-z]/.test(password)) {
-          securityLevelFlag++;    //lowercase
+          securityLevelFlag++ // lowercase
         }
         if (/[A-Z]/.test(password)) {
-          securityLevelFlag++;    //uppercase
+          securityLevelFlag++ // uppercase
         }
         if (/[0-9]/.test(password)) {
-          securityLevelFlag++;    //digital
+          securityLevelFlag++ // digital
         }
         if (this.containSpecialChar(password)) {
-          securityLevelFlag++;    //specialcase
+          securityLevelFlag++ // specialcase
         }
-        return securityLevelFlag;
+        return securityLevelFlag
       }
     },
     containSpecialChar(str) {
-      const containSpecial = RegExp(/[(\ )(\~)(\!)(\@)(\#)(\$)(\%)(\^)(\&)(\*)(\()(\))(\-)(\_)(\+)(\=)(\[)(\])(\{)(\})(\|)(\\)(\;)(\:)(\')(\")(\,)(\.)(\/)(\<)(\>)(\?)(\)]+/);
-      return (containSpecial.test(str));
+      const containSpecial = RegExp(/[(\ )(\~)(\!)(\@)(\#)(\$)(\%)(\^)(\&)(\*)(\()(\))(\-)(\_)(\+)(\=)(\[)(\])(\{)(\})(\|)(\\)(\;)(\:)(\')(\")(\,)(\.)(\/)(\<)(\>)(\?)(\)]+/)
+      return (containSpecial.test(str))
     },
     changePass1(value) {
-      this.visible1 = !(value === "show");
+      this.visible1 = !(value === 'show')
     },
     changePass2(value) {
-      this.visible2 = !(value === "show");
+      this.visible2 = !(value === 'show')
     },
     changePass3(value) {
-      this.visible3 = !(value === "show");
-    },
+      this.visible3 = !(value === 'show')
+    }
   }
 }
 </script>

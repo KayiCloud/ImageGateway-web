@@ -1,6 +1,6 @@
 <template>
   <div class="wrap_404">
-    <img src="~@/assets/images/404.png" alt="404" />
+    <img src="~@/assets/images/404.png" alt="404"/>
     <p>迷路了~</p>
     <el-button type="primary" size="small" @click="goback">回到起点</el-button>
   </div>
@@ -11,8 +11,8 @@ export default {
   methods: {
     goback() {
       this.$router.push({
-        path: "/login"
-      });
+        path: '/login'
+      })
     }
   }
 }

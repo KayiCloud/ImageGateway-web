@@ -18,8 +18,8 @@
         <el-form-item label="租户" prop="tenantId">
           <el-select filterable :disabled="dialogType==='modify'" v-model="formData.tenantId">
             <el-option v-for="(item) in mx_tenantAll" :key="item.id" :label="item.name" :value="item.id">
-              <span style="float: left">{{ item.name }}</span>
-              <span style="float: right; color: #8492a6; font-size: 13px">{{ item.id.slice(0,8) }}</span>
+              <span style="float: left">{{item.name}}</span>
+              <span style="float: right; color: #8492a6; font-size: 13px">{{item.id.slice(0,8)}}</span>
             </el-option>
           </el-select>
         </el-form-item>
@@ -53,7 +53,7 @@ import {
 import mxTenant from '@/mixins/tenant'
 export default {
   mixins: [mxTenant],
-  data(){
+  data() {
     return {
       dialogType: 'add',
       dialogTitle: '映射编码新增',
@@ -67,27 +67,27 @@ export default {
         mapCode: ''
       },
       rules: {
-        tenantId: [{required: true, message: '租户不能为空！', trigger: 'blur'}],
-        code: [{required: true, message: '编码不能为空！', trigger: 'blur'}],
-        mapCode: [{required: true, message: '映射编码不能为空！', trigger: 'blur'}]
+        tenantId: [{ required: true, message: '租户不能为空！', trigger: 'blur' }],
+        code: [{ required: true, message: '编码不能为空！', trigger: 'blur' }],
+        mapCode: [{ required: true, message: '映射编码不能为空！', trigger: 'blur' }]
       }
     }
   },
-  created(){
+  created() {
     this.mx_getTenantAll()
   },
   methods: {
-    init(type, tenantInfo){
+    init(type, tenantInfo) {
       this.dialogType = type
-      this.dialogTitle = type=='add'?'映射编码新增':'映射编码修改'
+      this.dialogTitle = type === 'add' ? '映射编码新增' : '映射编码修改'
       this.mapTenantDialog = true
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         this.$refs.dataForm.resetFields()
-        if(tenantInfo && tenantInfo.id){
-          if(this.dialogType === 'add'){
+        if (tenantInfo && tenantInfo.id) {
+          if (this.dialogType === 'add') {
             // this.formData.tenantName = tenantInfo.name
             this.formData.tenantId = tenantInfo.id
-          }else if(this.dialogType === 'modify') {
+          } else if (this.dialogType === 'modify') {
             this.formData.id = tenantInfo.id
             // this.formData.tenantName = tenantInfo.tenantName
             this.formData.tenantId = tenantInfo.tenantId
@@ -99,7 +99,7 @@ export default {
       })
     },
     // 关闭回调
-    dialogClose(){
+    dialogClose() {
       this.formData.id = ''
       // this.formData.tenantName = ''
       this.formData.tenantId = ''
@@ -107,7 +107,7 @@ export default {
       this.formData.mapCode = ''
     },
     // 用于租户新增或修改的时候刷新租户数据
-    refreshMxTenantAll(){
+    refreshMxTenantAll() {
       this.mx_getTenantAll()
     },
     // 验证表单
@@ -121,26 +121,26 @@ export default {
       })
     },
     // 映射编码新增提交
-    async send(){
+    async send() {
       const valid = await this.validateFun('dataForm')
-      if(valid){
-        const params = {...this.formData}
+      if (valid) {
+        const params = { ...this.formData }
         this.loading = true
-        if(this.dialogType === 'add') {
+        if (this.dialogType === 'add') {
           // 新增
-          postMapTenant(params).then(res=>{
+          postMapTenant(params).then(res => {
             this.loading = false
-            if(res && res.code === 1){
+            if (res && res.code === 1) {
               this.$message.success(`映射编码设置成功`)
               this.mapTenantDialog = false
               this.$emit('tenantMapSend')
             }
           })
-        }else{
+        } else {
           // 修改
-          putMapTenant(params).then(res=>{
+          putMapTenant(params).then(res => {
             this.loading = false
-            if(res && res.code === 1){
+            if (res && res.code === 1) {
               this.$message.success(`映射编码修改成功`)
               this.mapTenantDialog = false
               this.$emit('tenantMapSend')
@@ -150,9 +150,9 @@ export default {
       }
     },
     // 获取租户信息
-    getTenantInfo(){
-      getMultiTenancyTenantInfo({id:this.formData.tenantId}).then(res=>{
-        if(res && res.code === 1){
+    getTenantInfo() {
+      getMultiTenancyTenantInfo({ id: this.formData.tenantId }).then(res => {
+        if (res && res.code === 1) {
           this.formData.tenantName = res.data.name
         }
       })
