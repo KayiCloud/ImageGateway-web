@@ -31,7 +31,7 @@ export const getMultiTenancyTenantsAll = params => {
 }
 // 详情
 export const getMultiTenancyTenantInfo = params => {
-  return http.get(`/api/multi-tenancy/tenants/${params.id}`, params, 'query')
+  return http.get(`/api/multi-tenancy/tenants/${params.id}`)
 }
 // 增
 export const postMultiTenancyTenants = params => {
@@ -64,11 +64,11 @@ export const putQuerier = params => {
 }
 // 删
 export const deleteQuerier = params => {
-  return http.delete(`/api/querier/${params.id}`, params)
+  return http.delete(`/api/querier/${params.id}`)
 }
 // 详情
 export const getQuerierInfo = params => {
-  return http.get(`/api/querier/${params.id}`, params)
+  return http.get(`/api/querier/${params.id}`)
 }
 
 // data-query-provider ===============================================
@@ -77,7 +77,7 @@ export const getDataQueryProvider = params => {
 }
 // 详情
 export const getDataQueryProviderInfo = params => {
-  return http.get(`/api/data-query-provider/${params.provider}`, params)
+  return http.get(`/api/data-query-provider/${params.provider}`)
 }
 
 // data-query-provider  querier ================================================
@@ -86,7 +86,7 @@ export const getGatewayConfiguration = params => {
 }
 // 详情
 export const getGatewayConfigurationInfo = params => {
-  return http.get(`/api/gateway-configuration/current/${params.tenantId}`, params)
+  return http.get(`/api/gateway-configuration/current/${params.tenantId}`)
 }
 // 增
 export const postGatewayConfiguration = params => {
@@ -103,10 +103,10 @@ export const getMapTenant = params => {
 }
 // 详情
 export const getMapTenantById = params => {
-  return http.get(`/api/map-tenant/${params.id}`, params)
+  return http.get(`/api/map-tenant/${params.id}`)
 }
 export const getMapTenantByCode = params => {
-  return http.get(`/api/map-tenant/get-by-code/${params.code}`, params)
+  return http.get(`/api/map-tenant/get-by-code/${params.code}`)
 }
 // 增
 export const postMapTenant = params => {
@@ -118,6 +118,6 @@ export const putMapTenant = params => {
 }
 // 删
 export const deleteMapTenant = params => {
-  return http.delete(`/api/map-tenant/${params.id}`, params)
+  return http.delete(`/api/map-tenant/${params.id}`)
 }
 
