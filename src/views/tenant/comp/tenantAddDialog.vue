@@ -15,10 +15,10 @@
         :model="formtenant"
         :rules="rules"
       >
-        <el-form-item label="名称" prop="name">
+        <el-form-item label="租户" prop="name">
           <el-input
             v-model="formtenant.name"
-            placeholder="名称"
+            placeholder="租户"
           ></el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="adminEmailAddress" v-if="tenantType=='add'">
@@ -82,7 +82,7 @@ export default {
         extraProperties: {}
       },
       rules: {
-        name: [{ required: true, message: '名称不能为空！', trigger: 'blur' }],
+        name: [{ required: true, message: '租户不能为空！', trigger: 'blur' }],
         adminEmailAddress: [{ required: true, message: '邮箱不能为空！', trigger: 'blur' }],
         adminPassword: [
           { required: true, message: '密码不能为空！', trigger: 'blur' },

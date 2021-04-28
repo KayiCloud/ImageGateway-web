@@ -25,9 +25,9 @@ import menulistjson from '@/data/menulistjson.js'
 import avatar from '@/assets/images/avatar2.jpg'
 import { isLocal } from '@/settings.js'
 
-let userNameLocal = ''
 let _userInfo = getUserInfo()
 let _tokenInfo = getTokenInfo()
+let userNameLocal = !_userInfo ? '' : _userInfo.userName
 const getDefaultState = () => {
   return {
     tokenInfo: !_tokenInfo ? '' : _tokenInfo,
@@ -170,12 +170,12 @@ const actions = {
   }) {
     return new Promise((resolve, reject) => {
       const content = {
-        userName: userNameLocal || 'local',
-        userCode: 'local',
-        hospitalId: 'local',
-        hospitalCode: 'local',
-        hospitalName: 'local',
-        id: 'local'
+        userName: userNameLocal || 'admin'
+        // userCode: 'local',
+        // hospitalId: 'local',
+        // hospitalCode: 'local',
+        // hospitalName: 'local',
+        // id: 'local'
       }
       commit('SET_USERINFO', content)
       setUserInfo(JSON.stringify(content))

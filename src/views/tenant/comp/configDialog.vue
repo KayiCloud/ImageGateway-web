@@ -15,14 +15,14 @@
         :model="formquerier"
         :rules="rules"
       >
-        <el-form-item label="名称" prop="name">
+        <el-form-item label="租户" prop="name">
           <el-input
             clearable
             v-model="formquerier.name"
-            placeholder="名称"
+            placeholder="租户"
           ></el-input>
         </el-form-item>
-        <el-form-item label="querier" prop="dataQueryId">
+        <el-form-item label="查询器" prop="dataQueryId">
           <el-select v-model="formquerier.dataQueryId" filterable>
             <el-option
               v-for="item in querierOptions"
@@ -72,7 +72,7 @@ export default {
         describe: ''
       },
       rules: {
-        dataQueryId: [{ required: true, message: '请选择 querier！', trigger: 'change' }],
+        dataQueryId: [{ required: true, message: '请选择查询器！', trigger: 'change' }],
         name: [{ required: true, message: '那么不能为空！', trigger: 'blur' }]
       },
       tenantInfo: {

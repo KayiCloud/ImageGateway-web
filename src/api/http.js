@@ -71,7 +71,7 @@ function getOptions(url, method, data, params, queryAndBody) {
     const paramsData = data
     const bodyObject = paramsData.bodyObject
     delete paramsData.bodyObject
-    options.headers['Content-Type'] = 'application/json;charset=UTF-8'
+    // options.headers['Content-Type'] = 'application/json;charset=UTF-8'
     options.params = getData(paramsData, url)
     options.data = getData(bodyObject, url)
   } else {
@@ -109,7 +109,10 @@ function checkStatus(response) {
     if (response.data.error_description) {
       bus.$message.error(response.data.error_description)
     }
-    return { code: 1 }
+    if (response.data.error.message) {
+      bus.$message.error(response.data.error.message)
+    }
+    return { code: -1 }
   } else {
     if (response.data.error.message) {
       bus.$message.error(response.data.error.message)
