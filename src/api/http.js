@@ -13,11 +13,12 @@ axios.interceptors.request.use(
     // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     // =========================================================
     // 请求拦截
-    // const tokeninfo = getTokenInfo()
-    // let token = tokeninfo ? tokeninfo.access_token : "";
-    // if (token) {
-    //   config.headers["Authorization"] = `${tokeninfo.token_type} ${token}`;
-    // }
+    const tokeninfo = getTokenInfo()
+    let token = tokeninfo ? tokeninfo.access_token : ''
+    if (token) {
+      config.headers['Authorization'] = `${tokeninfo.token_type} ${token}`
+      config.headers['X-Requested-With'] = `XMLHttpRequest`
+    }
     if (config.headers['Content-Type'] !== 'multipart/form-data' && qsUrl.indexOf(config.url) >= 0) {
       if (config.method === 'post' || config.method === 'POST') {
         config.data = qs.stringify(config.data)

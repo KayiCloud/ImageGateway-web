@@ -56,6 +56,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       filename: 'index.html',
       template: 'index.html',
       inject: true,
+      node_mode: '',
       favicon: path.resolve('./static/favicon.ico')
     }),
     // copy custom static assets

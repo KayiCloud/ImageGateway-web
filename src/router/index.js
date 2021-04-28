@@ -9,6 +9,8 @@ Vue.use(Router)
 const createRouter = () => new Router({
   mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
+  base: process.env.NODE_ENV === 'mode' ? '/query/' : '/',
+  // base: '/query/',
   routes
 })
 
